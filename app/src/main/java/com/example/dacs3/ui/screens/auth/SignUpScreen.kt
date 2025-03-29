@@ -8,16 +8,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.dacs3.ui.viewmodels.*
 
 @Composable
 fun SignUpScreen(
     navController: NavController,
-    onSignUp: (String, String, String) -> Unit
+    onSignUp: (String, String, String) -> Unit,
+    authViewModel: AuthViewModel
 ) {
     var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+    val authEvent by authViewModel.authEvent.collectAsState()
 
     Column(
         modifier = Modifier
@@ -37,7 +40,8 @@ fun SignUpScreen(
             value = username,
             onValueChange = { username = it },
             label = { Text("Username") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            isError = authEvent is AuthEvent.ShowError
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -46,7 +50,8 @@ fun SignUpScreen(
             value = email,
             onValueChange = { email = it },
             label = { Text("Email") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            isError = authEvent is AuthEvent.ShowError
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -56,7 +61,8 @@ fun SignUpScreen(
             onValueChange = { password = it },
             label = { Text("Password") },
             visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            isError = authEvent is AuthEvent.ShowError
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -66,8 +72,18 @@ fun SignUpScreen(
             onValueChange = { confirmPassword = it },
             label = { Text("Confirm Password") },
             visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            isError = authEvent is AuthEvent.ShowError
         )
+
+        if (authEvent is AuthEvent.ShowError) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = (authEvent as AuthEvent.ShowError).message,
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
 
         Spacer(modifier = Modifier.height(32.dp))
 
@@ -90,4 +106,4 @@ fun SignUpScreen(
             Text("Already have an account? Login")
         }
     }
-} 
+}

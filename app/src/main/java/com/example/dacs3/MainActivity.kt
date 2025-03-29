@@ -13,7 +13,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.dacs3.data.AppDatabase
+
 import com.example.dacs3.data.UserPreferences
 import com.example.dacs3.navigation.*
 import com.example.dacs3.ui.components.*
@@ -29,9 +29,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         
-        val database = AppDatabase.getDatabase(this)
         val userPreferences = UserPreferences(this)
-        val authViewModel = AuthViewModel(database.userDao(), userPreferences)
+        val authViewModel = AuthViewModel(userPreferences)
 
         setContent {
             DACS3Theme {
@@ -66,7 +65,8 @@ class MainActivity : ComponentActivity() {
                                 navController = navController,
                                 onSignUp = { username, email, password ->
                                     authViewModel.signUp(username, email, password)
-                                }
+                                },
+                                authViewModel = authViewModel
                             )
                         }
 

@@ -13,3 +13,12 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Firebase configuration files
+*firebase-adminsdk*.json
+*.keystore
+*.jks
+*.p12
+*.pem
+*.key
+google-services.json

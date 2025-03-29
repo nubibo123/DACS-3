@@ -1,1 +1,8 @@
 /build
+google-services.json
+*firebase-adminsdk*.json
+*.keystore
+*.jks
+*.p12
+*.pem
+*.key

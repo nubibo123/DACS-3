@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.dacs3" />
+                  <option name="mobileSdkAppId" value="1:972056196776:android:2e1d1e928b81a9ba27749d" />
+                  <option name="projectId" value="dacs3-5cf79" />
+                  <option name="projectNumber" value="972056196776" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
